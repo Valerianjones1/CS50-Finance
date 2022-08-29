@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+<table class="portfolio">
+    <thead>
+    <tr>
+     <th>Symbol</th>
+     <th>Name</th>
+     <th>Shares</th>
+     <th>Price</th>
+     <th>TOTAL</th>
+    </tr>
+</thead>
+<tbody>
+    {% for p in portfolio %}
+    <tr>
+        <td>{{ p["symbol"] }}</td>
+        <td>{{ p["name"] }}</td>
+        <td>{{ p["shares"] }}</td>
+        <td>{{ p["price"] | usd }}</td>
+        <td>{{ p["total"] | usd }}</td>
+    </tr>
+        {% endfor %}
+</tbody>
+    <tfoot class="tfooter">
+        <tr>
+            <td class="border-0 fw-bold text-end cash" colspan="3">Cash</td>
+            <td class="border-0 text-end cash">{{ users[0]["cash"] | usd }}</td>
+        </tr>
+        <tr>
+            <td class="border-0 fw-bold text-end cash" colspan="3">TOTAL</td>
+            <td class="border-0 w-bold text-end cash">{{ (users[0]["cash"]+total_stock) | usd }}</td>
+        </tr>
+    </tfoot>
+</table>
+
+{% endblock %}
